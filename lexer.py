@@ -32,6 +32,7 @@ t_COMMA = r','
 t_STRING = r'\"([^\\\"]|\\.)*\"'
 t_SEMICOLON = r';'
 
+
 # Identifier (variable name) rule
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'

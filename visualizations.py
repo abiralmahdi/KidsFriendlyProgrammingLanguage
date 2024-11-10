@@ -19,3 +19,11 @@ def plot_pie_chart(categories, counts, title="Pie Chart"):
     plt.title(title)
     plt.show()
 
+# # Example Usage
+# plot_pie_chart(['A', 'B', 'C'], [10, 15, 7], title="Sample Pie Chart")
+
+
+# # Example Usage
+# data = [5, 3, 9, 3, 7, 8, 5, 3]
+# plot_histogram(data, title="Sample Histogram")
+# plot_bar_chart(['A', 'B', 'C'], [10, 15, 7], title="Sample Bar Chart")
