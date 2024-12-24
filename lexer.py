@@ -7,6 +7,7 @@ tokens = (
     'MINUS',
     'TIMES',
     'DIVIDE',
+    'FACTORIAL',
     'LPAREN',
     'RPAREN',
     'IDENTIFIER',
@@ -23,6 +24,7 @@ t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
 t_DIVIDE = r'/'
+t_FACTORIAL = r'!'
 t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_EQUALS = r'='
