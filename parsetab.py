@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'programCOMMA DIVIDE EQUALS IDENTIFIER LBRACKET LPAREN MINUS NUMBER PLUS RBRACKET RPAREN SEMICOLON STRING TIMESprogram : program statement\n               | statementstatement : expression SEMICOLONexpression : IDENTIFIER EQUALS expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expressionexpression : NUMBERexpression : IDENTIFIERexpression : LBRACKET arguments RBRACKETarguments : expression\n                 | arguments COMMA expression\n                 | emptyexpression : STRINGexpression : IDENTIFIER LPAREN arguments RPARENempty :'
+_lr_signature = 'programCOMMA DIVIDE EQUALS FACTORIAL IDENTIFIER LBRACKET LPAREN MINUS NUMBER PLUS RBRACKET RPAREN SEMICOLON STRING TIMESprogram : program statement\n               | statementstatement : expression SEMICOLONexpression : IDENTIFIER EQUALS expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expressionexpression : expression FACTORIALexpression : NUMBERexpression : IDENTIFIERexpression : LBRACKET arguments RBRACKETarguments : expression\n                 | arguments COMMA expression\n                 | emptyexpression : STRINGexpression : IDENTIFIER LPAREN arguments RPARENempty :'
     
-_lr_action_items = {'IDENTIFIER':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[4,4,-2,4,-1,-3,4,4,4,4,4,4,4,]),'NUMBER':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[5,5,-2,5,-1,-3,5,5,5,5,5,5,5,]),'LBRACKET':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[6,6,-2,6,-1,-3,6,6,6,6,6,6,6,]),'STRING':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[7,7,-2,7,-1,-3,7,7,7,7,7,7,7,]),'$end':([1,2,8,9,],[0,-2,-1,-3,]),'SEMICOLON':([3,4,5,7,19,20,21,22,23,25,27,],[9,-10,-9,-15,-5,-6,-7,-8,-4,-11,-16,]),'PLUS':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[10,-10,-9,-15,10,10,10,10,10,10,-11,-16,10,]),'MINUS':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[11,-10,-9,-15,11,11,11,11,11,11,-11,-16,11,]),'TIMES':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[12,-10,-9,-15,12,12,12,12,12,12,-11,-16,12,]),'DIVIDE':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[13,-10,-9,-15,13,13,13,13,13,13,-11,-16,13,]),'EQUALS':([4,],[14,]),'RBRACKET':([4,5,6,7,16,17,18,19,20,21,22,23,25,27,28,],[-10,-9,-17,-15,25,-12,-14,-5,-6,-7,-8,-4,-11,-16,-13,]),'COMMA':([4,5,6,7,15,16,17,18,19,20,21,22,23,24,25,27,28,],[-10,-9,-17,-15,-17,26,-12,-14,-5,-6,-7,-8,-4,26,-11,-16,-13,]),'RPAREN':([4,5,7,15,17,18,19,20,21,22,23,24,25,27,28,],[-10,-9,-15,-17,-12,-14,-5,-6,-7,-8,-4,27,-11,-16,-13,]),'LPAREN':([4,],[15,]),}
+_lr_action_items = {'IDENTIFIER':([0,1,2,6,8,9,10,11,12,13,15,16,27,],[4,4,-2,4,-1,-3,4,4,4,4,4,4,4,]),'NUMBER':([0,1,2,6,8,9,10,11,12,13,15,16,27,],[5,5,-2,5,-1,-3,5,5,5,5,5,5,5,]),'LBRACKET':([0,1,2,6,8,9,10,11,12,13,15,16,27,],[6,6,-2,6,-1,-3,6,6,6,6,6,6,6,]),'STRING':([0,1,2,6,8,9,10,11,12,13,15,16,27,],[7,7,-2,7,-1,-3,7,7,7,7,7,7,7,]),'$end':([1,2,8,9,],[0,-2,-1,-3,]),'SEMICOLON':([3,4,5,7,14,20,21,22,23,24,26,28,],[9,-11,-10,-16,-9,-5,-6,-7,-8,-4,-12,-17,]),'PLUS':([3,4,5,7,14,18,20,21,22,23,24,26,28,29,],[10,-11,-10,-16,-9,10,10,10,10,10,10,-12,-17,10,]),'MINUS':([3,4,5,7,14,18,20,21,22,23,24,26,28,29,],[11,-11,-10,-16,-9,11,11,11,11,11,11,-12,-17,11,]),'TIMES':([3,4,5,7,14,18,20,21,22,23,24,26,28,29,],[12,-11,-10,-16,-9,12,12,12,12,12,12,-12,-17,12,]),'DIVIDE':([3,4,5,7,14,18,20,21,22,23,24,26,28,29,],[13,-11,-10,-16,-9,13,13,13,13,13,13,-12,-17,13,]),'FACTORIAL':([3,4,5,7,14,18,20,21,22,23,24,26,28,29,],[14,-11,-10,-16,-9,14,14,14,14,14,14,-12,-17,14,]),'EQUALS':([4,],[15,]),'RBRACKET':([4,5,6,7,14,17,18,19,20,21,22,23,24,26,28,29,],[-11,-10,-18,-16,-9,26,-13,-15,-5,-6,-7,-8,-4,-12,-17,-14,]),'COMMA':([4,5,6,7,14,16,17,18,19,20,21,22,23,24,25,26,28,29,],[-11,-10,-18,-16,-9,-18,27,-13,-15,-5,-6,-7,-8,-4,27,-12,-17,-14,]),'RPAREN':([4,5,7,14,16,18,19,20,21,22,23,24,25,26,28,29,],[-11,-10,-16,-9,-18,-13,-15,-5,-6,-7,-8,-4,28,-12,-17,-14,]),'LPAREN':([4,],[16,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement':([0,1,],[2,8,]),'expression':([0,1,6,10,11,12,13,14,15,26,],[3,3,17,19,20,21,22,23,17,28,]),'arguments':([6,15,],[16,24,]),'empty':([6,15,],[18,18,]),}
+_lr_goto_items = {'program':([0,],[1,]),'statement':([0,1,],[2,8,]),'expression':([0,1,6,10,11,12,13,15,16,27,],[3,3,18,20,21,22,23,24,18,29,]),'arguments':([6,16,],[17,25,]),'empty':([6,16,],[19,19,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -35,13 +35,14 @@ _lr_productions = [
   ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',24),
   ('expression -> expression TIMES expression','expression',3,'p_expression_binop','parser.py',25),
   ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','parser.py',26),
-  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',30),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','parser.py',34),
-  ('expression -> LBRACKET arguments RBRACKET','expression',3,'p_expression_list','parser.py',38),
-  ('arguments -> expression','arguments',1,'p_arguments','parser.py',42),
-  ('arguments -> arguments COMMA expression','arguments',3,'p_arguments','parser.py',43),
-  ('arguments -> empty','arguments',1,'p_arguments','parser.py',44),
-  ('expression -> STRING','expression',1,'p_expression_string','parser.py',54),
-  ('expression -> IDENTIFIER LPAREN arguments RPAREN','expression',4,'p_expression_function_call','parser.py',59),
-  ('empty -> <empty>','empty',0,'p_empty','parser.py',63),
+  ('expression -> expression FACTORIAL','expression',2,'p_expression_unaryop','parser.py',30),
+  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',34),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','parser.py',38),
+  ('expression -> LBRACKET arguments RBRACKET','expression',3,'p_expression_list','parser.py',42),
+  ('arguments -> expression','arguments',1,'p_arguments','parser.py',46),
+  ('arguments -> arguments COMMA expression','arguments',3,'p_arguments','parser.py',47),
+  ('arguments -> empty','arguments',1,'p_arguments','parser.py',48),
+  ('expression -> STRING','expression',1,'p_expression_string','parser.py',58),
+  ('expression -> IDENTIFIER LPAREN arguments RPAREN','expression',4,'p_expression_function_call','parser.py',63),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',67),
 ]

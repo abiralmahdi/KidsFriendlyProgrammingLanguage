@@ -11,39 +11,41 @@ Rule 5     expression -> expression PLUS expression
 Rule 6     expression -> expression MINUS expression
 Rule 7     expression -> expression TIMES expression
 Rule 8     expression -> expression DIVIDE expression
-Rule 9     expression -> NUMBER
-Rule 10    expression -> IDENTIFIER
-Rule 11    expression -> LBRACKET arguments RBRACKET
-Rule 12    arguments -> expression
-Rule 13    arguments -> arguments COMMA expression
-Rule 14    arguments -> empty
-Rule 15    expression -> STRING
-Rule 16    expression -> IDENTIFIER LPAREN arguments RPAREN
-Rule 17    empty -> <empty>
+Rule 9     expression -> expression FACTORIAL
+Rule 10    expression -> NUMBER
+Rule 11    expression -> IDENTIFIER
+Rule 12    expression -> LBRACKET arguments RBRACKET
+Rule 13    arguments -> expression
+Rule 14    arguments -> arguments COMMA expression
+Rule 15    arguments -> empty
+Rule 16    expression -> STRING
+Rule 17    expression -> IDENTIFIER LPAREN arguments RPAREN
+Rule 18    empty -> <empty>
 
 Terminals, with rules where they appear
 
-COMMA                : 13
+COMMA                : 14
 DIVIDE               : 8
 EQUALS               : 4
-IDENTIFIER           : 4 10 16
-LBRACKET             : 11
-LPAREN               : 16
+FACTORIAL            : 9
+IDENTIFIER           : 4 11 17
+LBRACKET             : 12
+LPAREN               : 17
 MINUS                : 6
-NUMBER               : 9
+NUMBER               : 10
 PLUS                 : 5
-RBRACKET             : 11
-RPAREN               : 16
+RBRACKET             : 12
+RPAREN               : 17
 SEMICOLON            : 3
-STRING               : 15
+STRING               : 16
 TIMES                : 7
 error                : 
 
 Nonterminals, with rules where they appear
 
-arguments            : 11 13 16
-empty                : 14
-expression           : 3 4 5 5 6 6 7 7 8 8 12 13
+arguments            : 12 14 17
+empty                : 15
+expression           : 3 4 5 5 6 6 7 7 8 8 9 13 14
 program              : 1 0
 statement            : 1 2
 
@@ -60,11 +62,12 @@ state 0
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
@@ -85,11 +88,12 @@ state 1
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
@@ -117,87 +121,93 @@ state 3
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
     SEMICOLON       shift and go to state 9
     PLUS            shift and go to state 10
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
 
 state 4
 
     (4) expression -> IDENTIFIER . EQUALS expression
-    (10) expression -> IDENTIFIER .
-    (16) expression -> IDENTIFIER . LPAREN arguments RPAREN
+    (11) expression -> IDENTIFIER .
+    (17) expression -> IDENTIFIER . LPAREN arguments RPAREN
 
-    EQUALS          shift and go to state 14
-    SEMICOLON       reduce using rule 10 (expression -> IDENTIFIER .)
-    PLUS            reduce using rule 10 (expression -> IDENTIFIER .)
-    MINUS           reduce using rule 10 (expression -> IDENTIFIER .)
-    TIMES           reduce using rule 10 (expression -> IDENTIFIER .)
-    DIVIDE          reduce using rule 10 (expression -> IDENTIFIER .)
-    RBRACKET        reduce using rule 10 (expression -> IDENTIFIER .)
-    COMMA           reduce using rule 10 (expression -> IDENTIFIER .)
-    RPAREN          reduce using rule 10 (expression -> IDENTIFIER .)
-    LPAREN          shift and go to state 15
+    EQUALS          shift and go to state 15
+    SEMICOLON       reduce using rule 11 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 11 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 11 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 11 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 11 (expression -> IDENTIFIER .)
+    FACTORIAL       reduce using rule 11 (expression -> IDENTIFIER .)
+    RBRACKET        reduce using rule 11 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 11 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 11 (expression -> IDENTIFIER .)
+    LPAREN          shift and go to state 16
 
 
 state 5
 
-    (9) expression -> NUMBER .
+    (10) expression -> NUMBER .
 
-    SEMICOLON       reduce using rule 9 (expression -> NUMBER .)
-    PLUS            reduce using rule 9 (expression -> NUMBER .)
-    MINUS           reduce using rule 9 (expression -> NUMBER .)
-    TIMES           reduce using rule 9 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 9 (expression -> NUMBER .)
-    RBRACKET        reduce using rule 9 (expression -> NUMBER .)
-    COMMA           reduce using rule 9 (expression -> NUMBER .)
-    RPAREN          reduce using rule 9 (expression -> NUMBER .)
+    SEMICOLON       reduce using rule 10 (expression -> NUMBER .)
+    PLUS            reduce using rule 10 (expression -> NUMBER .)
+    MINUS           reduce using rule 10 (expression -> NUMBER .)
+    TIMES           reduce using rule 10 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 10 (expression -> NUMBER .)
+    FACTORIAL       reduce using rule 10 (expression -> NUMBER .)
+    RBRACKET        reduce using rule 10 (expression -> NUMBER .)
+    COMMA           reduce using rule 10 (expression -> NUMBER .)
+    RPAREN          reduce using rule 10 (expression -> NUMBER .)
 
 
 state 6
 
-    (11) expression -> LBRACKET . arguments RBRACKET
-    (12) arguments -> . expression
-    (13) arguments -> . arguments COMMA expression
-    (14) arguments -> . empty
+    (12) expression -> LBRACKET . arguments RBRACKET
+    (13) arguments -> . expression
+    (14) arguments -> . arguments COMMA expression
+    (15) arguments -> . empty
     (4) expression -> . IDENTIFIER EQUALS expression
     (5) expression -> . expression PLUS expression
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-    (17) empty -> .
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (18) empty -> .
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
-    RBRACKET        reduce using rule 17 (empty -> .)
-    COMMA           reduce using rule 17 (empty -> .)
+    RBRACKET        reduce using rule 18 (empty -> .)
+    COMMA           reduce using rule 18 (empty -> .)
 
-    arguments                      shift and go to state 16
-    expression                     shift and go to state 17
-    empty                          shift and go to state 18
+    arguments                      shift and go to state 17
+    expression                     shift and go to state 18
+    empty                          shift and go to state 19
 
 state 7
 
-    (15) expression -> STRING .
+    (16) expression -> STRING .
 
-    SEMICOLON       reduce using rule 15 (expression -> STRING .)
-    PLUS            reduce using rule 15 (expression -> STRING .)
-    MINUS           reduce using rule 15 (expression -> STRING .)
-    TIMES           reduce using rule 15 (expression -> STRING .)
-    DIVIDE          reduce using rule 15 (expression -> STRING .)
-    RBRACKET        reduce using rule 15 (expression -> STRING .)
-    COMMA           reduce using rule 15 (expression -> STRING .)
-    RPAREN          reduce using rule 15 (expression -> STRING .)
+    SEMICOLON       reduce using rule 16 (expression -> STRING .)
+    PLUS            reduce using rule 16 (expression -> STRING .)
+    MINUS           reduce using rule 16 (expression -> STRING .)
+    TIMES           reduce using rule 16 (expression -> STRING .)
+    DIVIDE          reduce using rule 16 (expression -> STRING .)
+    FACTORIAL       reduce using rule 16 (expression -> STRING .)
+    RBRACKET        reduce using rule 16 (expression -> STRING .)
+    COMMA           reduce using rule 16 (expression -> STRING .)
+    RPAREN          reduce using rule 16 (expression -> STRING .)
 
 
 state 8
@@ -230,18 +240,19 @@ state 10
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
 
-    expression                     shift and go to state 19
+    expression                     shift and go to state 20
 
 state 11
 
@@ -251,18 +262,19 @@ state 11
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
 
-    expression                     shift and go to state 20
+    expression                     shift and go to state 21
 
 state 12
 
@@ -272,18 +284,19 @@ state 12
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
 
-    expression                     shift and go to state 21
+    expression                     shift and go to state 22
 
 state 13
 
@@ -293,32 +306,12 @@ state 13
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 22
-
-state 14
-
-    (4) expression -> IDENTIFIER EQUALS . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
@@ -327,82 +320,124 @@ state 14
 
     expression                     shift and go to state 23
 
+state 14
+
+    (9) expression -> expression FACTORIAL .
+
+    SEMICOLON       reduce using rule 9 (expression -> expression FACTORIAL .)
+    PLUS            reduce using rule 9 (expression -> expression FACTORIAL .)
+    MINUS           reduce using rule 9 (expression -> expression FACTORIAL .)
+    TIMES           reduce using rule 9 (expression -> expression FACTORIAL .)
+    DIVIDE          reduce using rule 9 (expression -> expression FACTORIAL .)
+    FACTORIAL       reduce using rule 9 (expression -> expression FACTORIAL .)
+    RBRACKET        reduce using rule 9 (expression -> expression FACTORIAL .)
+    COMMA           reduce using rule 9 (expression -> expression FACTORIAL .)
+    RPAREN          reduce using rule 9 (expression -> expression FACTORIAL .)
+
+
 state 15
 
-    (16) expression -> IDENTIFIER LPAREN . arguments RPAREN
-    (12) arguments -> . expression
-    (13) arguments -> . arguments COMMA expression
-    (14) arguments -> . empty
+    (4) expression -> IDENTIFIER EQUALS . expression
     (4) expression -> . IDENTIFIER EQUALS expression
     (5) expression -> . expression PLUS expression
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-    (17) empty -> .
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
-    RPAREN          reduce using rule 17 (empty -> .)
-    COMMA           reduce using rule 17 (empty -> .)
 
-    arguments                      shift and go to state 24
-    expression                     shift and go to state 17
-    empty                          shift and go to state 18
+    expression                     shift and go to state 24
 
 state 16
 
-    (11) expression -> LBRACKET arguments . RBRACKET
-    (13) arguments -> arguments . COMMA expression
+    (17) expression -> IDENTIFIER LPAREN . arguments RPAREN
+    (13) arguments -> . expression
+    (14) arguments -> . arguments COMMA expression
+    (15) arguments -> . empty
+    (4) expression -> . IDENTIFIER EQUALS expression
+    (5) expression -> . expression PLUS expression
+    (6) expression -> . expression MINUS expression
+    (7) expression -> . expression TIMES expression
+    (8) expression -> . expression DIVIDE expression
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (18) empty -> .
 
-    RBRACKET        shift and go to state 25
-    COMMA           shift and go to state 26
+    IDENTIFIER      shift and go to state 4
+    NUMBER          shift and go to state 5
+    LBRACKET        shift and go to state 6
+    STRING          shift and go to state 7
+    RPAREN          reduce using rule 18 (empty -> .)
+    COMMA           reduce using rule 18 (empty -> .)
 
+    arguments                      shift and go to state 25
+    expression                     shift and go to state 18
+    empty                          shift and go to state 19
 
 state 17
 
-    (12) arguments -> expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (12) expression -> LBRACKET arguments . RBRACKET
+    (14) arguments -> arguments . COMMA expression
 
-    RBRACKET        reduce using rule 12 (arguments -> expression .)
-    COMMA           reduce using rule 12 (arguments -> expression .)
-    RPAREN          reduce using rule 12 (arguments -> expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    RBRACKET        shift and go to state 26
+    COMMA           shift and go to state 27
 
 
 state 18
 
-    (14) arguments -> empty .
+    (13) arguments -> expression .
+    (5) expression -> expression . PLUS expression
+    (6) expression -> expression . MINUS expression
+    (7) expression -> expression . TIMES expression
+    (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
-    RBRACKET        reduce using rule 14 (arguments -> empty .)
-    COMMA           reduce using rule 14 (arguments -> empty .)
-    RPAREN          reduce using rule 14 (arguments -> empty .)
+    RBRACKET        reduce using rule 13 (arguments -> expression .)
+    COMMA           reduce using rule 13 (arguments -> expression .)
+    RPAREN          reduce using rule 13 (arguments -> expression .)
+    PLUS            shift and go to state 10
+    MINUS           shift and go to state 11
+    TIMES           shift and go to state 12
+    DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
 
 state 19
+
+    (15) arguments -> empty .
+
+    RBRACKET        reduce using rule 15 (arguments -> empty .)
+    COMMA           reduce using rule 15 (arguments -> empty .)
+    RPAREN          reduce using rule 15 (arguments -> empty .)
+
+
+state 20
 
     (5) expression -> expression PLUS expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for FACTORIAL resolved as shift
     SEMICOLON       reduce using rule 5 (expression -> expression PLUS expression .)
     RBRACKET        reduce using rule 5 (expression -> expression PLUS expression .)
     COMMA           reduce using rule 5 (expression -> expression PLUS expression .)
@@ -411,25 +446,29 @@ state 19
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
   ! PLUS            [ reduce using rule 5 (expression -> expression PLUS expression .) ]
   ! MINUS           [ reduce using rule 5 (expression -> expression PLUS expression .) ]
   ! TIMES           [ reduce using rule 5 (expression -> expression PLUS expression .) ]
   ! DIVIDE          [ reduce using rule 5 (expression -> expression PLUS expression .) ]
+  ! FACTORIAL       [ reduce using rule 5 (expression -> expression PLUS expression .) ]
 
 
-state 20
+state 21
 
     (6) expression -> expression MINUS expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for FACTORIAL resolved as shift
     SEMICOLON       reduce using rule 6 (expression -> expression MINUS expression .)
     RBRACKET        reduce using rule 6 (expression -> expression MINUS expression .)
     COMMA           reduce using rule 6 (expression -> expression MINUS expression .)
@@ -438,25 +477,29 @@ state 20
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
   ! PLUS            [ reduce using rule 6 (expression -> expression MINUS expression .) ]
   ! MINUS           [ reduce using rule 6 (expression -> expression MINUS expression .) ]
   ! TIMES           [ reduce using rule 6 (expression -> expression MINUS expression .) ]
   ! DIVIDE          [ reduce using rule 6 (expression -> expression MINUS expression .) ]
+  ! FACTORIAL       [ reduce using rule 6 (expression -> expression MINUS expression .) ]
 
 
-state 21
+state 22
 
     (7) expression -> expression TIMES expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for FACTORIAL resolved as shift
     SEMICOLON       reduce using rule 7 (expression -> expression TIMES expression .)
     RBRACKET        reduce using rule 7 (expression -> expression TIMES expression .)
     COMMA           reduce using rule 7 (expression -> expression TIMES expression .)
@@ -465,25 +508,29 @@ state 21
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
   ! PLUS            [ reduce using rule 7 (expression -> expression TIMES expression .) ]
   ! MINUS           [ reduce using rule 7 (expression -> expression TIMES expression .) ]
   ! TIMES           [ reduce using rule 7 (expression -> expression TIMES expression .) ]
   ! DIVIDE          [ reduce using rule 7 (expression -> expression TIMES expression .) ]
+  ! FACTORIAL       [ reduce using rule 7 (expression -> expression TIMES expression .) ]
 
 
-state 22
+state 23
 
     (8) expression -> expression DIVIDE expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for FACTORIAL resolved as shift
     SEMICOLON       reduce using rule 8 (expression -> expression DIVIDE expression .)
     RBRACKET        reduce using rule 8 (expression -> expression DIVIDE expression .)
     COMMA           reduce using rule 8 (expression -> expression DIVIDE expression .)
@@ -492,25 +539,29 @@ state 22
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
   ! PLUS            [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
   ! MINUS           [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
   ! TIMES           [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
   ! DIVIDE          [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
+  ! FACTORIAL       [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
 
 
-state 23
+state 24
 
     (4) expression -> IDENTIFIER EQUALS expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
   ! shift/reduce conflict for PLUS resolved as shift
   ! shift/reduce conflict for MINUS resolved as shift
   ! shift/reduce conflict for TIMES resolved as shift
   ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for FACTORIAL resolved as shift
     SEMICOLON       reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
     RBRACKET        reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
     COMMA           reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
@@ -519,107 +570,119 @@ state 23
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
   ! PLUS            [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
   ! MINUS           [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
   ! TIMES           [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
   ! DIVIDE          [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
-
-
-state 24
-
-    (16) expression -> IDENTIFIER LPAREN arguments . RPAREN
-    (13) arguments -> arguments . COMMA expression
-
-    RPAREN          shift and go to state 27
-    COMMA           shift and go to state 26
+  ! FACTORIAL       [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
 
 
 state 25
 
-    (11) expression -> LBRACKET arguments RBRACKET .
+    (17) expression -> IDENTIFIER LPAREN arguments . RPAREN
+    (14) arguments -> arguments . COMMA expression
 
-    SEMICOLON       reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    PLUS            reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    MINUS           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    TIMES           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    DIVIDE          reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    RBRACKET        reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    COMMA           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    RPAREN          reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
+    RPAREN          shift and go to state 28
+    COMMA           shift and go to state 27
 
 
 state 26
 
-    (13) arguments -> arguments COMMA . expression
+    (12) expression -> LBRACKET arguments RBRACKET .
+
+    SEMICOLON       reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    PLUS            reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    MINUS           reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    TIMES           reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    DIVIDE          reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    FACTORIAL       reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    RBRACKET        reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    COMMA           reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+    RPAREN          reduce using rule 12 (expression -> LBRACKET arguments RBRACKET .)
+
+
+state 27
+
+    (14) arguments -> arguments COMMA . expression
     (4) expression -> . IDENTIFIER EQUALS expression
     (5) expression -> . expression PLUS expression
     (6) expression -> . expression MINUS expression
     (7) expression -> . expression TIMES expression
     (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (9) expression -> . expression FACTORIAL
+    (10) expression -> . NUMBER
+    (11) expression -> . IDENTIFIER
+    (12) expression -> . LBRACKET arguments RBRACKET
+    (16) expression -> . STRING
+    (17) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
     IDENTIFIER      shift and go to state 4
     NUMBER          shift and go to state 5
     LBRACKET        shift and go to state 6
     STRING          shift and go to state 7
 
-    expression                     shift and go to state 28
-
-state 27
-
-    (16) expression -> IDENTIFIER LPAREN arguments RPAREN .
-
-    SEMICOLON       reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    PLUS            reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    MINUS           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    TIMES           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    DIVIDE          reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    RBRACKET        reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    COMMA           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    RPAREN          reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-
+    expression                     shift and go to state 29
 
 state 28
 
-    (13) arguments -> arguments COMMA expression .
+    (17) expression -> IDENTIFIER LPAREN arguments RPAREN .
+
+    SEMICOLON       reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    PLUS            reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    MINUS           reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    TIMES           reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    DIVIDE          reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    FACTORIAL       reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    RBRACKET        reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    COMMA           reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    RPAREN          reduce using rule 17 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+
+
+state 29
+
+    (14) arguments -> arguments COMMA expression .
     (5) expression -> expression . PLUS expression
     (6) expression -> expression . MINUS expression
     (7) expression -> expression . TIMES expression
     (8) expression -> expression . DIVIDE expression
+    (9) expression -> expression . FACTORIAL
 
-    RBRACKET        reduce using rule 13 (arguments -> arguments COMMA expression .)
-    COMMA           reduce using rule 13 (arguments -> arguments COMMA expression .)
-    RPAREN          reduce using rule 13 (arguments -> arguments COMMA expression .)
+    RBRACKET        reduce using rule 14 (arguments -> arguments COMMA expression .)
+    COMMA           reduce using rule 14 (arguments -> arguments COMMA expression .)
+    RPAREN          reduce using rule 14 (arguments -> arguments COMMA expression .)
     PLUS            shift and go to state 10
     MINUS           shift and go to state 11
     TIMES           shift and go to state 12
     DIVIDE          shift and go to state 13
+    FACTORIAL       shift and go to state 14
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 19 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 19 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 19 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 19 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 20 resolved as shift
+WARNING: shift/reduce conflict for FACTORIAL in state 20 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
+WARNING: shift/reduce conflict for FACTORIAL in state 21 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 22 resolved as shift
+WARNING: shift/reduce conflict for FACTORIAL in state 22 resolved as shift
 WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift
 WARNING: shift/reduce conflict for MINUS in state 23 resolved as shift
 WARNING: shift/reduce conflict for TIMES in state 23 resolved as shift
 WARNING: shift/reduce conflict for DIVIDE in state 23 resolved as shift
+WARNING: shift/reduce conflict for FACTORIAL in state 23 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 24 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 24 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 24 resolved as shift
+WARNING: shift/reduce conflict for FACTORIAL in state 24 resolved as shift
