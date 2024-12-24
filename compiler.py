@@ -18,6 +18,13 @@ class Compiler:
             right = self.compile(node[3])
             operator = node[1]
             return f"({left} {operator} {right})"
+        
+        elif node[0] == 'unaryop':
+            # Handle unary operations like factorial
+            operand = self.compile(node[2])
+            operator = node[1]
+            if operator == '!':
+                return f"math.factorial({operand})"
 
         elif node[0] == 'number':
             # Handle numbers

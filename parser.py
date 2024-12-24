@@ -32,6 +32,10 @@ def p_expression_binop(p):
                   | expression LT expression'''
     p[0] = ('binop', p[2], p[1], p[3])
 
+def p_expression_unaryop(p):
+    'expression : expression FACTORIAL'
+    p[0] = ('unaryop', '!', p[1])
+
 def p_expression_number(p):
     'expression : NUMBER'
     p[0] = ('number', p[1])

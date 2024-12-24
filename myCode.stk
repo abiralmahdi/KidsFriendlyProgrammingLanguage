@@ -1,6 +1,8 @@
 repeat i from 1 to 5 do:
     x = i * 2;
     if x > 5 then:
-        plot_bar_chart(['x', 'i'], [x, i], title="Values");
+        print("x is greater than 5");
     end;
 end;
+
+plot_scatter_plot([1, 2, 3, 4], [10, 20, 25, 30], title="Sample Scatter Plot", xlabel="Time", ylabel="Value");

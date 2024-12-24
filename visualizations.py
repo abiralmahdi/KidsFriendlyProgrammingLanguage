@@ -19,6 +19,21 @@ def plot_pie_chart(categories, counts, title="Pie Chart"):
     plt.title(title)
     plt.show()
 
+def plot_box_plot(data, labels=None, title="Box Plot"):
+    plt.boxplot(data, labels=labels, patch_artist=True)
+    plt.title(title)
+    plt.xlabel("Category")
+    plt.ylabel("Value")
+    plt.show()
+
+def plot_scatter_plot(x, y, title="Scatter Plot", xlabel="X-axis", ylabel="Y-axis"):
+    plt.scatter(x, y, color='blue', edgecolor='black')
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.grid(True)
+    plt.show()
+
 # # Example Usage
 # plot_pie_chart(['A', 'B', 'C'], [10, 15, 7], title="Sample Pie Chart")
 
