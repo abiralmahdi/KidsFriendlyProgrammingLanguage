@@ -1,15 +1,22 @@
 # main.py
 from parser import parser
 from compiler import Compiler
+from lexer import lexer
+from pprint import pprint
 
-# Sample input code for testing
-input_code = '''
-x = calculate_mean([5, 3, 9, 3, 7, 8, 5, 3]);
-y = calculate_median([2, 3, 4, 5]);
-plot_histogram([1,2,3,4,5]);
-plot_bar_chart(["A", "B", "C"], [10, 15, 7]);
-abir = 4+33;
-'''
+def read_custom_file(filename):
+    if filename.endswith('.stk'):
+        with open(filename, 'r') as file:
+            code = file.read()
+        return code
+    else:
+        raise ValueError("Invalid file extension. Please use a '.stk' file.")
+
+input_code = read_custom_file("myCode.stk")
+
+# lexer.input(input_code)
+# for token in lexer:
+#     print(token)
 
 # Parse the input code
 ast = parser.parse(input_code)
@@ -19,6 +26,8 @@ if ast is None:
 else:
     print("Parsing successful. Proceeding with compilation.")
     compiler = Compiler()
+
+    pprint(ast)
 
     for node in ast:  # Iterate over the parsed list of statements
         compiler.compile(node)

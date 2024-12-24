@@ -6,45 +6,67 @@ Rule 0     S' -> program
 Rule 1     program -> program statement
 Rule 2     program -> statement
 Rule 3     statement -> expression SEMICOLON
-Rule 4     expression -> IDENTIFIER EQUALS expression
-Rule 5     expression -> expression PLUS expression
-Rule 6     expression -> expression MINUS expression
-Rule 7     expression -> expression TIMES expression
-Rule 8     expression -> expression DIVIDE expression
-Rule 9     expression -> NUMBER
-Rule 10    expression -> IDENTIFIER
-Rule 11    expression -> LBRACKET arguments RBRACKET
-Rule 12    arguments -> expression
-Rule 13    arguments -> arguments COMMA expression
-Rule 14    arguments -> empty
-Rule 15    expression -> STRING
-Rule 16    expression -> IDENTIFIER LPAREN arguments RPAREN
-Rule 17    empty -> <empty>
+Rule 4     statement -> repeat_loop
+Rule 5     statement -> if_statement
+Rule 6     statement -> if_else_statement
+Rule 7     expression -> IDENTIFIER EQUALS expression
+Rule 8     expression -> expression PLUS expression
+Rule 9     expression -> expression MINUS expression
+Rule 10    expression -> expression TIMES expression
+Rule 11    expression -> expression DIVIDE expression
+Rule 12    expression -> expression GT expression
+Rule 13    expression -> expression LT expression
+Rule 14    expression -> NUMBER
+Rule 15    expression -> IDENTIFIER
+Rule 16    expression -> LBRACKET arguments RBRACKET
+Rule 17    arguments -> expression
+Rule 18    arguments -> arguments COMMA expression
+Rule 19    arguments -> empty
+Rule 20    expression -> STRING
+Rule 21    expression -> IDENTIFIER LPAREN arguments RPAREN
+Rule 22    repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+Rule 23    if_statement -> IF expression THEN COLON program END SEMICOLON
+Rule 24    if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON
+Rule 25    empty -> <empty>
 
 Terminals, with rules where they appear
 
-COMMA                : 13
-DIVIDE               : 8
-EQUALS               : 4
-IDENTIFIER           : 4 10 16
-LBRACKET             : 11
-LPAREN               : 16
-MINUS                : 6
-NUMBER               : 9
-PLUS                 : 5
-RBRACKET             : 11
-RPAREN               : 16
-SEMICOLON            : 3
-STRING               : 15
-TIMES                : 7
+COLON                : 22 23 24 24
+COMMA                : 18
+DIVIDE               : 11
+DO                   : 22
+ELSE                 : 24
+END                  : 22 23 24
+EQUALS               : 7
+FROM                 : 22
+GT                   : 12
+IDENTIFIER           : 7 15 21 22
+IF                   : 23 24
+LBRACKET             : 16
+LPAREN               : 21
+LT                   : 13
+MINUS                : 9
+NUMBER               : 14
+PLUS                 : 8
+RBRACKET             : 16
+REPEAT               : 22
+RPAREN               : 21
+SEMICOLON            : 3 22 23 24
+STRING               : 20
+THEN                 : 23 24
+TIMES                : 10
+TO                   : 22
 error                : 
 
 Nonterminals, with rules where they appear
 
-arguments            : 11 13 16
-empty                : 14
-expression           : 3 4 5 5 6 6 7 7 8 8 12 13
-program              : 1 0
+arguments            : 16 18 21
+empty                : 19
+expression           : 3 7 8 8 9 9 10 10 11 11 12 12 13 13 17 18 22 22 23 24
+if_else_statement    : 6
+if_statement         : 5
+program              : 1 22 23 24 24 0
+repeat_loop          : 4
 statement            : 1 2
 
 Parsing method: LALR
@@ -55,49 +77,75 @@ state 0
     (1) program -> . program statement
     (2) program -> . statement
     (3) statement -> . expression SEMICOLON
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
 
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
 
     program                        shift and go to state 1
     statement                      shift and go to state 2
     expression                     shift and go to state 3
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
 
 state 1
 
     (0) S' -> program .
     (1) program -> program . statement
     (3) statement -> . expression SEMICOLON
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
 
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
 
-    statement                      shift and go to state 8
+    statement                      shift and go to state 13
     expression                     shift and go to state 3
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
 
 state 2
 
@@ -107,100 +155,201 @@ state 2
     NUMBER          reduce using rule 2 (program -> statement .)
     LBRACKET        reduce using rule 2 (program -> statement .)
     STRING          reduce using rule 2 (program -> statement .)
+    REPEAT          reduce using rule 2 (program -> statement .)
+    IF              reduce using rule 2 (program -> statement .)
     $end            reduce using rule 2 (program -> statement .)
+    END             reduce using rule 2 (program -> statement .)
+    ELSE            reduce using rule 2 (program -> statement .)
 
 
 state 3
 
     (3) statement -> expression . SEMICOLON
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
 
-    SEMICOLON       shift and go to state 9
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    SEMICOLON       shift and go to state 14
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
 
 
 state 4
 
-    (4) expression -> IDENTIFIER . EQUALS expression
-    (10) expression -> IDENTIFIER .
-    (16) expression -> IDENTIFIER . LPAREN arguments RPAREN
+    (4) statement -> repeat_loop .
 
-    EQUALS          shift and go to state 14
-    SEMICOLON       reduce using rule 10 (expression -> IDENTIFIER .)
-    PLUS            reduce using rule 10 (expression -> IDENTIFIER .)
-    MINUS           reduce using rule 10 (expression -> IDENTIFIER .)
-    TIMES           reduce using rule 10 (expression -> IDENTIFIER .)
-    DIVIDE          reduce using rule 10 (expression -> IDENTIFIER .)
-    RBRACKET        reduce using rule 10 (expression -> IDENTIFIER .)
-    COMMA           reduce using rule 10 (expression -> IDENTIFIER .)
-    RPAREN          reduce using rule 10 (expression -> IDENTIFIER .)
-    LPAREN          shift and go to state 15
+    IDENTIFIER      reduce using rule 4 (statement -> repeat_loop .)
+    NUMBER          reduce using rule 4 (statement -> repeat_loop .)
+    LBRACKET        reduce using rule 4 (statement -> repeat_loop .)
+    STRING          reduce using rule 4 (statement -> repeat_loop .)
+    REPEAT          reduce using rule 4 (statement -> repeat_loop .)
+    IF              reduce using rule 4 (statement -> repeat_loop .)
+    $end            reduce using rule 4 (statement -> repeat_loop .)
+    END             reduce using rule 4 (statement -> repeat_loop .)
+    ELSE            reduce using rule 4 (statement -> repeat_loop .)
 
 
 state 5
 
-    (9) expression -> NUMBER .
+    (5) statement -> if_statement .
 
-    SEMICOLON       reduce using rule 9 (expression -> NUMBER .)
-    PLUS            reduce using rule 9 (expression -> NUMBER .)
-    MINUS           reduce using rule 9 (expression -> NUMBER .)
-    TIMES           reduce using rule 9 (expression -> NUMBER .)
-    DIVIDE          reduce using rule 9 (expression -> NUMBER .)
-    RBRACKET        reduce using rule 9 (expression -> NUMBER .)
-    COMMA           reduce using rule 9 (expression -> NUMBER .)
-    RPAREN          reduce using rule 9 (expression -> NUMBER .)
+    IDENTIFIER      reduce using rule 5 (statement -> if_statement .)
+    NUMBER          reduce using rule 5 (statement -> if_statement .)
+    LBRACKET        reduce using rule 5 (statement -> if_statement .)
+    STRING          reduce using rule 5 (statement -> if_statement .)
+    REPEAT          reduce using rule 5 (statement -> if_statement .)
+    IF              reduce using rule 5 (statement -> if_statement .)
+    $end            reduce using rule 5 (statement -> if_statement .)
+    END             reduce using rule 5 (statement -> if_statement .)
+    ELSE            reduce using rule 5 (statement -> if_statement .)
 
 
 state 6
 
-    (11) expression -> LBRACKET . arguments RBRACKET
-    (12) arguments -> . expression
-    (13) arguments -> . arguments COMMA expression
-    (14) arguments -> . empty
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-    (17) empty -> .
+    (6) statement -> if_else_statement .
 
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-    RBRACKET        reduce using rule 17 (empty -> .)
-    COMMA           reduce using rule 17 (empty -> .)
+    IDENTIFIER      reduce using rule 6 (statement -> if_else_statement .)
+    NUMBER          reduce using rule 6 (statement -> if_else_statement .)
+    LBRACKET        reduce using rule 6 (statement -> if_else_statement .)
+    STRING          reduce using rule 6 (statement -> if_else_statement .)
+    REPEAT          reduce using rule 6 (statement -> if_else_statement .)
+    IF              reduce using rule 6 (statement -> if_else_statement .)
+    $end            reduce using rule 6 (statement -> if_else_statement .)
+    END             reduce using rule 6 (statement -> if_else_statement .)
+    ELSE            reduce using rule 6 (statement -> if_else_statement .)
 
-    arguments                      shift and go to state 16
-    expression                     shift and go to state 17
-    empty                          shift and go to state 18
 
 state 7
 
-    (15) expression -> STRING .
+    (7) expression -> IDENTIFIER . EQUALS expression
+    (15) expression -> IDENTIFIER .
+    (21) expression -> IDENTIFIER . LPAREN arguments RPAREN
 
-    SEMICOLON       reduce using rule 15 (expression -> STRING .)
-    PLUS            reduce using rule 15 (expression -> STRING .)
-    MINUS           reduce using rule 15 (expression -> STRING .)
-    TIMES           reduce using rule 15 (expression -> STRING .)
-    DIVIDE          reduce using rule 15 (expression -> STRING .)
-    RBRACKET        reduce using rule 15 (expression -> STRING .)
-    COMMA           reduce using rule 15 (expression -> STRING .)
-    RPAREN          reduce using rule 15 (expression -> STRING .)
+    EQUALS          shift and go to state 21
+    SEMICOLON       reduce using rule 15 (expression -> IDENTIFIER .)
+    PLUS            reduce using rule 15 (expression -> IDENTIFIER .)
+    MINUS           reduce using rule 15 (expression -> IDENTIFIER .)
+    TIMES           reduce using rule 15 (expression -> IDENTIFIER .)
+    DIVIDE          reduce using rule 15 (expression -> IDENTIFIER .)
+    GT              reduce using rule 15 (expression -> IDENTIFIER .)
+    LT              reduce using rule 15 (expression -> IDENTIFIER .)
+    RBRACKET        reduce using rule 15 (expression -> IDENTIFIER .)
+    COMMA           reduce using rule 15 (expression -> IDENTIFIER .)
+    THEN            reduce using rule 15 (expression -> IDENTIFIER .)
+    RPAREN          reduce using rule 15 (expression -> IDENTIFIER .)
+    TO              reduce using rule 15 (expression -> IDENTIFIER .)
+    DO              reduce using rule 15 (expression -> IDENTIFIER .)
+    LPAREN          shift and go to state 22
 
 
 state 8
+
+    (14) expression -> NUMBER .
+
+    SEMICOLON       reduce using rule 14 (expression -> NUMBER .)
+    PLUS            reduce using rule 14 (expression -> NUMBER .)
+    MINUS           reduce using rule 14 (expression -> NUMBER .)
+    TIMES           reduce using rule 14 (expression -> NUMBER .)
+    DIVIDE          reduce using rule 14 (expression -> NUMBER .)
+    GT              reduce using rule 14 (expression -> NUMBER .)
+    LT              reduce using rule 14 (expression -> NUMBER .)
+    RBRACKET        reduce using rule 14 (expression -> NUMBER .)
+    COMMA           reduce using rule 14 (expression -> NUMBER .)
+    THEN            reduce using rule 14 (expression -> NUMBER .)
+    RPAREN          reduce using rule 14 (expression -> NUMBER .)
+    TO              reduce using rule 14 (expression -> NUMBER .)
+    DO              reduce using rule 14 (expression -> NUMBER .)
+
+
+state 9
+
+    (16) expression -> LBRACKET . arguments RBRACKET
+    (17) arguments -> . expression
+    (18) arguments -> . arguments COMMA expression
+    (19) arguments -> . empty
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (25) empty -> .
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    RBRACKET        reduce using rule 25 (empty -> .)
+    COMMA           reduce using rule 25 (empty -> .)
+
+    arguments                      shift and go to state 23
+    expression                     shift and go to state 24
+    empty                          shift and go to state 25
+
+state 10
+
+    (20) expression -> STRING .
+
+    SEMICOLON       reduce using rule 20 (expression -> STRING .)
+    PLUS            reduce using rule 20 (expression -> STRING .)
+    MINUS           reduce using rule 20 (expression -> STRING .)
+    TIMES           reduce using rule 20 (expression -> STRING .)
+    DIVIDE          reduce using rule 20 (expression -> STRING .)
+    GT              reduce using rule 20 (expression -> STRING .)
+    LT              reduce using rule 20 (expression -> STRING .)
+    RBRACKET        reduce using rule 20 (expression -> STRING .)
+    COMMA           reduce using rule 20 (expression -> STRING .)
+    THEN            reduce using rule 20 (expression -> STRING .)
+    RPAREN          reduce using rule 20 (expression -> STRING .)
+    TO              reduce using rule 20 (expression -> STRING .)
+    DO              reduce using rule 20 (expression -> STRING .)
+
+
+state 11
+
+    (22) repeat_loop -> REPEAT . IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+
+    IDENTIFIER      shift and go to state 26
+
+
+state 12
+
+    (23) if_statement -> IF . expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> IF . expression THEN COLON program ELSE COLON program END SEMICOLON
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+
+    expression                     shift and go to state 27
+
+state 13
 
     (1) program -> program statement .
 
@@ -208,10 +357,14 @@ state 8
     NUMBER          reduce using rule 1 (program -> program statement .)
     LBRACKET        reduce using rule 1 (program -> program statement .)
     STRING          reduce using rule 1 (program -> program statement .)
+    REPEAT          reduce using rule 1 (program -> program statement .)
+    IF              reduce using rule 1 (program -> program statement .)
     $end            reduce using rule 1 (program -> program statement .)
+    END             reduce using rule 1 (program -> program statement .)
+    ELSE            reduce using rule 1 (program -> program statement .)
 
 
-state 9
+state 14
 
     (3) statement -> expression SEMICOLON .
 
@@ -219,407 +372,1075 @@ state 9
     NUMBER          reduce using rule 3 (statement -> expression SEMICOLON .)
     LBRACKET        reduce using rule 3 (statement -> expression SEMICOLON .)
     STRING          reduce using rule 3 (statement -> expression SEMICOLON .)
+    REPEAT          reduce using rule 3 (statement -> expression SEMICOLON .)
+    IF              reduce using rule 3 (statement -> expression SEMICOLON .)
     $end            reduce using rule 3 (statement -> expression SEMICOLON .)
+    END             reduce using rule 3 (statement -> expression SEMICOLON .)
+    ELSE            reduce using rule 3 (statement -> expression SEMICOLON .)
 
-
-state 10
-
-    (5) expression -> expression PLUS . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 19
-
-state 11
-
-    (6) expression -> expression MINUS . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 20
-
-state 12
-
-    (7) expression -> expression TIMES . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 21
-
-state 13
-
-    (8) expression -> expression DIVIDE . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 22
-
-state 14
-
-    (4) expression -> IDENTIFIER EQUALS . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-
-    expression                     shift and go to state 23
 
 state 15
 
-    (16) expression -> IDENTIFIER LPAREN . arguments RPAREN
-    (12) arguments -> . expression
-    (13) arguments -> . arguments COMMA expression
-    (14) arguments -> . empty
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
-    (17) empty -> .
+    (8) expression -> expression PLUS . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
-    RPAREN          reduce using rule 17 (empty -> .)
-    COMMA           reduce using rule 17 (empty -> .)
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
-    arguments                      shift and go to state 24
-    expression                     shift and go to state 17
-    empty                          shift and go to state 18
+    expression                     shift and go to state 28
 
 state 16
 
-    (11) expression -> LBRACKET arguments . RBRACKET
-    (13) arguments -> arguments . COMMA expression
+    (9) expression -> expression MINUS . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-    RBRACKET        shift and go to state 25
-    COMMA           shift and go to state 26
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
+    expression                     shift and go to state 29
 
 state 17
 
-    (12) arguments -> expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (10) expression -> expression TIMES . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-    RBRACKET        reduce using rule 12 (arguments -> expression .)
-    COMMA           reduce using rule 12 (arguments -> expression .)
-    RPAREN          reduce using rule 12 (arguments -> expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
+    expression                     shift and go to state 30
 
 state 18
 
-    (14) arguments -> empty .
+    (11) expression -> expression DIVIDE . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-    RBRACKET        reduce using rule 14 (arguments -> empty .)
-    COMMA           reduce using rule 14 (arguments -> empty .)
-    RPAREN          reduce using rule 14 (arguments -> empty .)
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
+    expression                     shift and go to state 31
 
 state 19
 
-    (5) expression -> expression PLUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (12) expression -> expression GT . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 5 (expression -> expression PLUS expression .)
-    RBRACKET        reduce using rule 5 (expression -> expression PLUS expression .)
-    COMMA           reduce using rule 5 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 5 (expression -> expression PLUS expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
-  ! PLUS            [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! MINUS           [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! TIMES           [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 5 (expression -> expression PLUS expression .) ]
-
+    expression                     shift and go to state 32
 
 state 20
 
-    (6) expression -> expression MINUS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (13) expression -> expression LT . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 6 (expression -> expression MINUS expression .)
-    RBRACKET        reduce using rule 6 (expression -> expression MINUS expression .)
-    COMMA           reduce using rule 6 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 6 (expression -> expression MINUS expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
-  ! PLUS            [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! MINUS           [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! TIMES           [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 6 (expression -> expression MINUS expression .) ]
-
+    expression                     shift and go to state 33
 
 state 21
 
-    (7) expression -> expression TIMES expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (7) expression -> IDENTIFIER EQUALS . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 7 (expression -> expression TIMES expression .)
-    RBRACKET        reduce using rule 7 (expression -> expression TIMES expression .)
-    COMMA           reduce using rule 7 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 7 (expression -> expression TIMES expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
 
-  ! PLUS            [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! MINUS           [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! TIMES           [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-  ! DIVIDE          [ reduce using rule 7 (expression -> expression TIMES expression .) ]
-
+    expression                     shift and go to state 34
 
 state 22
 
-    (8) expression -> expression DIVIDE expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (21) expression -> IDENTIFIER LPAREN . arguments RPAREN
+    (17) arguments -> . expression
+    (18) arguments -> . arguments COMMA expression
+    (19) arguments -> . empty
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (25) empty -> .
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 8 (expression -> expression DIVIDE expression .)
-    RBRACKET        reduce using rule 8 (expression -> expression DIVIDE expression .)
-    COMMA           reduce using rule 8 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 8 (expression -> expression DIVIDE expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    RPAREN          reduce using rule 25 (empty -> .)
+    COMMA           reduce using rule 25 (empty -> .)
 
-  ! PLUS            [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! MINUS           [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! TIMES           [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-  ! DIVIDE          [ reduce using rule 8 (expression -> expression DIVIDE expression .) ]
-
+    arguments                      shift and go to state 35
+    expression                     shift and go to state 24
+    empty                          shift and go to state 25
 
 state 23
 
-    (4) expression -> IDENTIFIER EQUALS expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (16) expression -> LBRACKET arguments . RBRACKET
+    (18) arguments -> arguments . COMMA expression
 
-  ! shift/reduce conflict for PLUS resolved as shift
-  ! shift/reduce conflict for MINUS resolved as shift
-  ! shift/reduce conflict for TIMES resolved as shift
-  ! shift/reduce conflict for DIVIDE resolved as shift
-    SEMICOLON       reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
-    RBRACKET        reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
-    COMMA           reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
-    RPAREN          reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
-
-  ! PLUS            [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
-  ! MINUS           [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
-  ! TIMES           [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
-  ! DIVIDE          [ reduce using rule 4 (expression -> IDENTIFIER EQUALS expression .) ]
+    RBRACKET        shift and go to state 36
+    COMMA           shift and go to state 37
 
 
 state 24
 
-    (16) expression -> IDENTIFIER LPAREN arguments . RPAREN
-    (13) arguments -> arguments . COMMA expression
+    (17) arguments -> expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
 
-    RPAREN          shift and go to state 27
-    COMMA           shift and go to state 26
+    RBRACKET        reduce using rule 17 (arguments -> expression .)
+    COMMA           reduce using rule 17 (arguments -> expression .)
+    RPAREN          reduce using rule 17 (arguments -> expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
 
 
 state 25
 
-    (11) expression -> LBRACKET arguments RBRACKET .
+    (19) arguments -> empty .
 
-    SEMICOLON       reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    PLUS            reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    MINUS           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    TIMES           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    DIVIDE          reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    RBRACKET        reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    COMMA           reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
-    RPAREN          reduce using rule 11 (expression -> LBRACKET arguments RBRACKET .)
+    RBRACKET        reduce using rule 19 (arguments -> empty .)
+    COMMA           reduce using rule 19 (arguments -> empty .)
+    RPAREN          reduce using rule 19 (arguments -> empty .)
 
 
 state 26
 
-    (13) arguments -> arguments COMMA . expression
-    (4) expression -> . IDENTIFIER EQUALS expression
-    (5) expression -> . expression PLUS expression
-    (6) expression -> . expression MINUS expression
-    (7) expression -> . expression TIMES expression
-    (8) expression -> . expression DIVIDE expression
-    (9) expression -> . NUMBER
-    (10) expression -> . IDENTIFIER
-    (11) expression -> . LBRACKET arguments RBRACKET
-    (15) expression -> . STRING
-    (16) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> REPEAT IDENTIFIER . FROM expression TO expression DO COLON program END SEMICOLON
 
-    IDENTIFIER      shift and go to state 4
-    NUMBER          shift and go to state 5
-    LBRACKET        shift and go to state 6
-    STRING          shift and go to state 7
+    FROM            shift and go to state 38
 
-    expression                     shift and go to state 28
 
 state 27
 
-    (16) expression -> IDENTIFIER LPAREN arguments RPAREN .
+    (23) if_statement -> IF expression . THEN COLON program END SEMICOLON
+    (24) if_else_statement -> IF expression . THEN COLON program ELSE COLON program END SEMICOLON
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
 
-    SEMICOLON       reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    PLUS            reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    MINUS           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    TIMES           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    DIVIDE          reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    RBRACKET        reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    COMMA           reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
-    RPAREN          reduce using rule 16 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    THEN            shift and go to state 39
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
 
 
 state 28
 
-    (13) arguments -> arguments COMMA expression .
-    (5) expression -> expression . PLUS expression
-    (6) expression -> expression . MINUS expression
-    (7) expression -> expression . TIMES expression
-    (8) expression -> expression . DIVIDE expression
+    (8) expression -> expression PLUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
 
-    RBRACKET        reduce using rule 13 (arguments -> arguments COMMA expression .)
-    COMMA           reduce using rule 13 (arguments -> arguments COMMA expression .)
-    RPAREN          reduce using rule 13 (arguments -> arguments COMMA expression .)
-    PLUS            shift and go to state 10
-    MINUS           shift and go to state 11
-    TIMES           shift and go to state 12
-    DIVIDE          shift and go to state 13
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 8 (expression -> expression PLUS expression .)
+    RBRACKET        reduce using rule 8 (expression -> expression PLUS expression .)
+    COMMA           reduce using rule 8 (expression -> expression PLUS expression .)
+    THEN            reduce using rule 8 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 8 (expression -> expression PLUS expression .)
+    TO              reduce using rule 8 (expression -> expression PLUS expression .)
+    DO              reduce using rule 8 (expression -> expression PLUS expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! MINUS           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! TIMES           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! GT              [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+  ! LT              [ reduce using rule 8 (expression -> expression PLUS expression .) ]
+
+
+state 29
+
+    (9) expression -> expression MINUS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 9 (expression -> expression MINUS expression .)
+    RBRACKET        reduce using rule 9 (expression -> expression MINUS expression .)
+    COMMA           reduce using rule 9 (expression -> expression MINUS expression .)
+    THEN            reduce using rule 9 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 9 (expression -> expression MINUS expression .)
+    TO              reduce using rule 9 (expression -> expression MINUS expression .)
+    DO              reduce using rule 9 (expression -> expression MINUS expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! MINUS           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! GT              [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+  ! LT              [ reduce using rule 9 (expression -> expression MINUS expression .) ]
+
+
+state 30
+
+    (10) expression -> expression TIMES expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 10 (expression -> expression TIMES expression .)
+    RBRACKET        reduce using rule 10 (expression -> expression TIMES expression .)
+    COMMA           reduce using rule 10 (expression -> expression TIMES expression .)
+    THEN            reduce using rule 10 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 10 (expression -> expression TIMES expression .)
+    TO              reduce using rule 10 (expression -> expression TIMES expression .)
+    DO              reduce using rule 10 (expression -> expression TIMES expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! MINUS           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! TIMES           [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! GT              [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+  ! LT              [ reduce using rule 10 (expression -> expression TIMES expression .) ]
+
+
+state 31
+
+    (11) expression -> expression DIVIDE expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 11 (expression -> expression DIVIDE expression .)
+    RBRACKET        reduce using rule 11 (expression -> expression DIVIDE expression .)
+    COMMA           reduce using rule 11 (expression -> expression DIVIDE expression .)
+    THEN            reduce using rule 11 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 11 (expression -> expression DIVIDE expression .)
+    TO              reduce using rule 11 (expression -> expression DIVIDE expression .)
+    DO              reduce using rule 11 (expression -> expression DIVIDE expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! MINUS           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! TIMES           [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! DIVIDE          [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! GT              [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+  ! LT              [ reduce using rule 11 (expression -> expression DIVIDE expression .) ]
+
+
+state 32
+
+    (12) expression -> expression GT expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 12 (expression -> expression GT expression .)
+    RBRACKET        reduce using rule 12 (expression -> expression GT expression .)
+    COMMA           reduce using rule 12 (expression -> expression GT expression .)
+    THEN            reduce using rule 12 (expression -> expression GT expression .)
+    RPAREN          reduce using rule 12 (expression -> expression GT expression .)
+    TO              reduce using rule 12 (expression -> expression GT expression .)
+    DO              reduce using rule 12 (expression -> expression GT expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 12 (expression -> expression GT expression .) ]
+  ! MINUS           [ reduce using rule 12 (expression -> expression GT expression .) ]
+  ! TIMES           [ reduce using rule 12 (expression -> expression GT expression .) ]
+  ! DIVIDE          [ reduce using rule 12 (expression -> expression GT expression .) ]
+  ! GT              [ reduce using rule 12 (expression -> expression GT expression .) ]
+  ! LT              [ reduce using rule 12 (expression -> expression GT expression .) ]
+
+
+state 33
+
+    (13) expression -> expression LT expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 13 (expression -> expression LT expression .)
+    RBRACKET        reduce using rule 13 (expression -> expression LT expression .)
+    COMMA           reduce using rule 13 (expression -> expression LT expression .)
+    THEN            reduce using rule 13 (expression -> expression LT expression .)
+    RPAREN          reduce using rule 13 (expression -> expression LT expression .)
+    TO              reduce using rule 13 (expression -> expression LT expression .)
+    DO              reduce using rule 13 (expression -> expression LT expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 13 (expression -> expression LT expression .) ]
+  ! MINUS           [ reduce using rule 13 (expression -> expression LT expression .) ]
+  ! TIMES           [ reduce using rule 13 (expression -> expression LT expression .) ]
+  ! DIVIDE          [ reduce using rule 13 (expression -> expression LT expression .) ]
+  ! GT              [ reduce using rule 13 (expression -> expression LT expression .) ]
+  ! LT              [ reduce using rule 13 (expression -> expression LT expression .) ]
+
+
+state 34
+
+    (7) expression -> IDENTIFIER EQUALS expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for TIMES resolved as shift
+  ! shift/reduce conflict for DIVIDE resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+    SEMICOLON       reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    RBRACKET        reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    COMMA           reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    THEN            reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    RPAREN          reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    TO              reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    DO              reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+  ! PLUS            [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! MINUS           [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! TIMES           [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! DIVIDE          [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! GT              [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+  ! LT              [ reduce using rule 7 (expression -> IDENTIFIER EQUALS expression .) ]
+
+
+state 35
+
+    (21) expression -> IDENTIFIER LPAREN arguments . RPAREN
+    (18) arguments -> arguments . COMMA expression
+
+    RPAREN          shift and go to state 40
+    COMMA           shift and go to state 37
+
+
+state 36
+
+    (16) expression -> LBRACKET arguments RBRACKET .
+
+    SEMICOLON       reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    PLUS            reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    MINUS           reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    TIMES           reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    DIVIDE          reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    GT              reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    LT              reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    RBRACKET        reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    COMMA           reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    THEN            reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    RPAREN          reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    TO              reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+    DO              reduce using rule 16 (expression -> LBRACKET arguments RBRACKET .)
+
+
+state 37
+
+    (18) arguments -> arguments COMMA . expression
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+
+    expression                     shift and go to state 41
+
+state 38
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM . expression TO expression DO COLON program END SEMICOLON
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+
+    expression                     shift and go to state 42
+
+state 39
+
+    (23) if_statement -> IF expression THEN . COLON program END SEMICOLON
+    (24) if_else_statement -> IF expression THEN . COLON program ELSE COLON program END SEMICOLON
+
+    COLON           shift and go to state 43
+
+
+state 40
+
+    (21) expression -> IDENTIFIER LPAREN arguments RPAREN .
+
+    SEMICOLON       reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    PLUS            reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    MINUS           reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    TIMES           reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    DIVIDE          reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    GT              reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    LT              reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    RBRACKET        reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    COMMA           reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    THEN            reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    RPAREN          reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    TO              reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+    DO              reduce using rule 21 (expression -> IDENTIFIER LPAREN arguments RPAREN .)
+
+
+state 41
+
+    (18) arguments -> arguments COMMA expression .
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+    RBRACKET        reduce using rule 18 (arguments -> arguments COMMA expression .)
+    COMMA           reduce using rule 18 (arguments -> arguments COMMA expression .)
+    RPAREN          reduce using rule 18 (arguments -> arguments COMMA expression .)
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+
+state 42
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression . TO expression DO COLON program END SEMICOLON
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+    TO              shift and go to state 44
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+
+state 43
+
+    (23) if_statement -> IF expression THEN COLON . program END SEMICOLON
+    (24) if_else_statement -> IF expression THEN COLON . program ELSE COLON program END SEMICOLON
+    (1) program -> . program statement
+    (2) program -> . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    program                        shift and go to state 45
+    statement                      shift and go to state 2
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 44
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO . expression DO COLON program END SEMICOLON
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+
+    expression                     shift and go to state 46
+
+state 45
+
+    (23) if_statement -> IF expression THEN COLON program . END SEMICOLON
+    (24) if_else_statement -> IF expression THEN COLON program . ELSE COLON program END SEMICOLON
+    (1) program -> program . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    END             shift and go to state 47
+    ELSE            shift and go to state 48
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    statement                      shift and go to state 13
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 46
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression . DO COLON program END SEMICOLON
+    (8) expression -> expression . PLUS expression
+    (9) expression -> expression . MINUS expression
+    (10) expression -> expression . TIMES expression
+    (11) expression -> expression . DIVIDE expression
+    (12) expression -> expression . GT expression
+    (13) expression -> expression . LT expression
+
+    DO              shift and go to state 49
+    PLUS            shift and go to state 15
+    MINUS           shift and go to state 16
+    TIMES           shift and go to state 17
+    DIVIDE          shift and go to state 18
+    GT              shift and go to state 19
+    LT              shift and go to state 20
+
+
+state 47
+
+    (23) if_statement -> IF expression THEN COLON program END . SEMICOLON
+
+    SEMICOLON       shift and go to state 50
+
+
+state 48
+
+    (24) if_else_statement -> IF expression THEN COLON program ELSE . COLON program END SEMICOLON
+
+    COLON           shift and go to state 51
+
+
+state 49
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO . COLON program END SEMICOLON
+
+    COLON           shift and go to state 52
+
+
+state 50
+
+    (23) if_statement -> IF expression THEN COLON program END SEMICOLON .
+
+    IDENTIFIER      reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    NUMBER          reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    LBRACKET        reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    STRING          reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    REPEAT          reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    IF              reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    $end            reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    END             reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+    ELSE            reduce using rule 23 (if_statement -> IF expression THEN COLON program END SEMICOLON .)
+
+
+state 51
+
+    (24) if_else_statement -> IF expression THEN COLON program ELSE COLON . program END SEMICOLON
+    (1) program -> . program statement
+    (2) program -> . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    program                        shift and go to state 53
+    statement                      shift and go to state 2
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 52
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON . program END SEMICOLON
+    (1) program -> . program statement
+    (2) program -> . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    program                        shift and go to state 54
+    statement                      shift and go to state 2
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 53
+
+    (24) if_else_statement -> IF expression THEN COLON program ELSE COLON program . END SEMICOLON
+    (1) program -> program . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    END             shift and go to state 55
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    statement                      shift and go to state 13
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 54
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program . END SEMICOLON
+    (1) program -> program . statement
+    (3) statement -> . expression SEMICOLON
+    (4) statement -> . repeat_loop
+    (5) statement -> . if_statement
+    (6) statement -> . if_else_statement
+    (7) expression -> . IDENTIFIER EQUALS expression
+    (8) expression -> . expression PLUS expression
+    (9) expression -> . expression MINUS expression
+    (10) expression -> . expression TIMES expression
+    (11) expression -> . expression DIVIDE expression
+    (12) expression -> . expression GT expression
+    (13) expression -> . expression LT expression
+    (14) expression -> . NUMBER
+    (15) expression -> . IDENTIFIER
+    (16) expression -> . LBRACKET arguments RBRACKET
+    (20) expression -> . STRING
+    (21) expression -> . IDENTIFIER LPAREN arguments RPAREN
+    (22) repeat_loop -> . REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON
+    (23) if_statement -> . IF expression THEN COLON program END SEMICOLON
+    (24) if_else_statement -> . IF expression THEN COLON program ELSE COLON program END SEMICOLON
+
+    END             shift and go to state 56
+    IDENTIFIER      shift and go to state 7
+    NUMBER          shift and go to state 8
+    LBRACKET        shift and go to state 9
+    STRING          shift and go to state 10
+    REPEAT          shift and go to state 11
+    IF              shift and go to state 12
+
+    expression                     shift and go to state 3
+    statement                      shift and go to state 13
+    repeat_loop                    shift and go to state 4
+    if_statement                   shift and go to state 5
+    if_else_statement              shift and go to state 6
+
+state 55
+
+    (24) if_else_statement -> IF expression THEN COLON program ELSE COLON program END . SEMICOLON
+
+    SEMICOLON       shift and go to state 57
+
+
+state 56
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END . SEMICOLON
+
+    SEMICOLON       shift and go to state 58
+
+
+state 57
+
+    (24) if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .
+
+    IDENTIFIER      reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    NUMBER          reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    LBRACKET        reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    STRING          reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    REPEAT          reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    IF              reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    $end            reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    END             reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+    ELSE            reduce using rule 24 (if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON .)
+
+
+state 58
+
+    (22) repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .
+
+    IDENTIFIER      reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    NUMBER          reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    LBRACKET        reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    STRING          reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    REPEAT          reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    IF              reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    $end            reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    END             reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
+    ELSE            reduce using rule 22 (repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for PLUS in state 19 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 19 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 19 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 19 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 20 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 20 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 20 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 20 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 21 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 21 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 21 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 21 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 22 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 22 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 22 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 22 resolved as shift
-WARNING: shift/reduce conflict for PLUS in state 23 resolved as shift
-WARNING: shift/reduce conflict for MINUS in state 23 resolved as shift
-WARNING: shift/reduce conflict for TIMES in state 23 resolved as shift
-WARNING: shift/reduce conflict for DIVIDE in state 23 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 28 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 28 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 28 resolved as shift
+WARNING: shift/reduce conflict for GT in state 28 resolved as shift
+WARNING: shift/reduce conflict for LT in state 28 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 29 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 29 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 29 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 29 resolved as shift
+WARNING: shift/reduce conflict for GT in state 29 resolved as shift
+WARNING: shift/reduce conflict for LT in state 29 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 30 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 30 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 30 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 30 resolved as shift
+WARNING: shift/reduce conflict for GT in state 30 resolved as shift
+WARNING: shift/reduce conflict for LT in state 30 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 31 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 31 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 31 resolved as shift
+WARNING: shift/reduce conflict for GT in state 31 resolved as shift
+WARNING: shift/reduce conflict for LT in state 31 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 32 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 32 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 32 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 32 resolved as shift
+WARNING: shift/reduce conflict for GT in state 32 resolved as shift
+WARNING: shift/reduce conflict for LT in state 32 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 33 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 33 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 33 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 33 resolved as shift
+WARNING: shift/reduce conflict for GT in state 33 resolved as shift
+WARNING: shift/reduce conflict for LT in state 33 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 34 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 34 resolved as shift
+WARNING: shift/reduce conflict for TIMES in state 34 resolved as shift
+WARNING: shift/reduce conflict for DIVIDE in state 34 resolved as shift
+WARNING: shift/reduce conflict for GT in state 34 resolved as shift
+WARNING: shift/reduce conflict for LT in state 34 resolved as shift

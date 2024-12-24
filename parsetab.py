@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'programCOMMA DIVIDE EQUALS IDENTIFIER LBRACKET LPAREN MINUS NUMBER PLUS RBRACKET RPAREN SEMICOLON STRING TIMESprogram : program statement\n               | statementstatement : expression SEMICOLONexpression : IDENTIFIER EQUALS expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expressionexpression : NUMBERexpression : IDENTIFIERexpression : LBRACKET arguments RBRACKETarguments : expression\n                 | arguments COMMA expression\n                 | emptyexpression : STRINGexpression : IDENTIFIER LPAREN arguments RPARENempty :'
+_lr_signature = 'programCOLON COMMA DIVIDE DO ELSE END EQUALS FROM GT IDENTIFIER IF LBRACKET LPAREN LT MINUS NUMBER PLUS RBRACKET REPEAT RPAREN SEMICOLON STRING THEN TIMES TOprogram : program statement\n               | statementstatement : expression SEMICOLON\n                 | repeat_loop \n                 | if_statement\n                 | if_else_statementexpression : IDENTIFIER EQUALS expressionexpression : expression PLUS expression\n                  | expression MINUS expression\n                  | expression TIMES expression\n                  | expression DIVIDE expression\n                  | expression GT expression\n                  | expression LT expressionexpression : NUMBERexpression : IDENTIFIERexpression : LBRACKET arguments RBRACKETarguments : expression\n                 | arguments COMMA expression\n                 | emptyexpression : STRINGexpression : IDENTIFIER LPAREN arguments RPARENrepeat_loop : REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLONif_statement : IF expression THEN COLON program END SEMICOLONif_else_statement : IF expression THEN COLON program ELSE COLON program END SEMICOLONempty :'
     
-_lr_action_items = {'IDENTIFIER':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[4,4,-2,4,-1,-3,4,4,4,4,4,4,4,]),'NUMBER':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[5,5,-2,5,-1,-3,5,5,5,5,5,5,5,]),'LBRACKET':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[6,6,-2,6,-1,-3,6,6,6,6,6,6,6,]),'STRING':([0,1,2,6,8,9,10,11,12,13,14,15,26,],[7,7,-2,7,-1,-3,7,7,7,7,7,7,7,]),'$end':([1,2,8,9,],[0,-2,-1,-3,]),'SEMICOLON':([3,4,5,7,19,20,21,22,23,25,27,],[9,-10,-9,-15,-5,-6,-7,-8,-4,-11,-16,]),'PLUS':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[10,-10,-9,-15,10,10,10,10,10,10,-11,-16,10,]),'MINUS':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[11,-10,-9,-15,11,11,11,11,11,11,-11,-16,11,]),'TIMES':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[12,-10,-9,-15,12,12,12,12,12,12,-11,-16,12,]),'DIVIDE':([3,4,5,7,17,19,20,21,22,23,25,27,28,],[13,-10,-9,-15,13,13,13,13,13,13,-11,-16,13,]),'EQUALS':([4,],[14,]),'RBRACKET':([4,5,6,7,16,17,18,19,20,21,22,23,25,27,28,],[-10,-9,-17,-15,25,-12,-14,-5,-6,-7,-8,-4,-11,-16,-13,]),'COMMA':([4,5,6,7,15,16,17,18,19,20,21,22,23,24,25,27,28,],[-10,-9,-17,-15,-17,26,-12,-14,-5,-6,-7,-8,-4,26,-11,-16,-13,]),'RPAREN':([4,5,7,15,17,18,19,20,21,22,23,24,25,27,28,],[-10,-9,-15,-17,-12,-14,-5,-6,-7,-8,-4,27,-11,-16,-13,]),'LPAREN':([4,],[15,]),}
+_lr_action_items = {'IDENTIFIER':([0,1,2,4,5,6,9,11,12,13,14,15,16,17,18,19,20,21,22,37,38,43,44,45,50,51,52,53,54,57,58,],[7,7,-2,-4,-5,-6,7,26,7,-1,-3,7,7,7,7,7,7,7,7,7,7,7,7,7,-23,7,7,7,7,-24,-22,]),'NUMBER':([0,1,2,4,5,6,9,12,13,14,15,16,17,18,19,20,21,22,37,38,43,44,45,50,51,52,53,54,57,58,],[8,8,-2,-4,-5,-6,8,8,-1,-3,8,8,8,8,8,8,8,8,8,8,8,8,8,-23,8,8,8,8,-24,-22,]),'LBRACKET':([0,1,2,4,5,6,9,12,13,14,15,16,17,18,19,20,21,22,37,38,43,44,45,50,51,52,53,54,57,58,],[9,9,-2,-4,-5,-6,9,9,-1,-3,9,9,9,9,9,9,9,9,9,9,9,9,9,-23,9,9,9,9,-24,-22,]),'STRING':([0,1,2,4,5,6,9,12,13,14,15,16,17,18,19,20,21,22,37,38,43,44,45,50,51,52,53,54,57,58,],[10,10,-2,-4,-5,-6,10,10,-1,-3,10,10,10,10,10,10,10,10,10,10,10,10,10,-23,10,10,10,10,-24,-22,]),'REPEAT':([0,1,2,4,5,6,13,14,43,45,50,51,52,53,54,57,58,],[11,11,-2,-4,-5,-6,-1,-3,11,11,-23,11,11,11,11,-24,-22,]),'IF':([0,1,2,4,5,6,13,14,43,45,50,51,52,53,54,57,58,],[12,12,-2,-4,-5,-6,-1,-3,12,12,-23,12,12,12,12,-24,-22,]),'$end':([1,2,4,5,6,13,14,50,57,58,],[0,-2,-4,-5,-6,-1,-3,-23,-24,-22,]),'END':([2,4,5,6,13,14,45,50,53,54,57,58,],[-2,-4,-5,-6,-1,-3,47,-23,55,56,-24,-22,]),'ELSE':([2,4,5,6,13,14,45,50,57,58,],[-2,-4,-5,-6,-1,-3,48,-23,-24,-22,]),'SEMICOLON':([3,7,8,10,28,29,30,31,32,33,34,36,40,47,55,56,],[14,-15,-14,-20,-8,-9,-10,-11,-12,-13,-7,-16,-21,50,57,58,]),'PLUS':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[15,-15,-14,-20,15,15,15,15,15,15,15,15,15,-16,-21,15,15,15,]),'MINUS':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[16,-15,-14,-20,16,16,16,16,16,16,16,16,16,-16,-21,16,16,16,]),'TIMES':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[17,-15,-14,-20,17,17,17,17,17,17,17,17,17,-16,-21,17,17,17,]),'DIVIDE':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[18,-15,-14,-20,18,18,18,18,18,18,18,18,18,-16,-21,18,18,18,]),'GT':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[19,-15,-14,-20,19,19,19,19,19,19,19,19,19,-16,-21,19,19,19,]),'LT':([3,7,8,10,24,27,28,29,30,31,32,33,34,36,40,41,42,46,],[20,-15,-14,-20,20,20,20,20,20,20,20,20,20,-16,-21,20,20,20,]),'EQUALS':([7,],[21,]),'RBRACKET':([7,8,9,10,23,24,25,28,29,30,31,32,33,34,36,40,41,],[-15,-14,-25,-20,36,-17,-19,-8,-9,-10,-11,-12,-13,-7,-16,-21,-18,]),'COMMA':([7,8,9,10,22,23,24,25,28,29,30,31,32,33,34,35,36,40,41,],[-15,-14,-25,-20,-25,37,-17,-19,-8,-9,-10,-11,-12,-13,-7,37,-16,-21,-18,]),'THEN':([7,8,10,27,28,29,30,31,32,33,34,36,40,],[-15,-14,-20,39,-8,-9,-10,-11,-12,-13,-7,-16,-21,]),'RPAREN':([7,8,10,22,24,25,28,29,30,31,32,33,34,35,36,40,41,],[-15,-14,-20,-25,-17,-19,-8,-9,-10,-11,-12,-13,-7,40,-16,-21,-18,]),'TO':([7,8,10,28,29,30,31,32,33,34,36,40,42,],[-15,-14,-20,-8,-9,-10,-11,-12,-13,-7,-16,-21,44,]),'DO':([7,8,10,28,29,30,31,32,33,34,36,40,46,],[-15,-14,-20,-8,-9,-10,-11,-12,-13,-7,-16,-21,49,]),'LPAREN':([7,],[22,]),'FROM':([26,],[38,]),'COLON':([39,48,49,],[43,51,52,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[1,]),'statement':([0,1,],[2,8,]),'expression':([0,1,6,10,11,12,13,14,15,26,],[3,3,17,19,20,21,22,23,17,28,]),'arguments':([6,15,],[16,24,]),'empty':([6,15,],[18,18,]),}
+_lr_goto_items = {'program':([0,43,51,52,],[1,45,53,54,]),'statement':([0,1,43,45,51,52,53,54,],[2,13,2,13,2,2,13,13,]),'expression':([0,1,9,12,15,16,17,18,19,20,21,22,37,38,43,44,45,51,52,53,54,],[3,3,24,27,28,29,30,31,32,33,34,24,41,42,3,46,3,3,3,3,3,]),'repeat_loop':([0,1,43,45,51,52,53,54,],[4,4,4,4,4,4,4,4,]),'if_statement':([0,1,43,45,51,52,53,54,],[5,5,5,5,5,5,5,5,]),'if_else_statement':([0,1,43,45,51,52,53,54,],[6,6,6,6,6,6,6,6,]),'arguments':([9,22,],[23,35,]),'empty':([9,22,],[25,25,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -29,19 +29,27 @@ _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
   ('program -> program statement','program',2,'p_program','parser.py',6),
   ('program -> statement','program',1,'p_program','parser.py',7),
-  ('statement -> expression SEMICOLON','statement',2,'p_statement','parser.py',14),
-  ('expression -> IDENTIFIER EQUALS expression','expression',3,'p_expression_assign','parser.py',19),
-  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',23),
-  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',24),
-  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','parser.py',25),
-  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','parser.py',26),
-  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',30),
-  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','parser.py',34),
-  ('expression -> LBRACKET arguments RBRACKET','expression',3,'p_expression_list','parser.py',38),
-  ('arguments -> expression','arguments',1,'p_arguments','parser.py',42),
-  ('arguments -> arguments COMMA expression','arguments',3,'p_arguments','parser.py',43),
-  ('arguments -> empty','arguments',1,'p_arguments','parser.py',44),
-  ('expression -> STRING','expression',1,'p_expression_string','parser.py',54),
-  ('expression -> IDENTIFIER LPAREN arguments RPAREN','expression',4,'p_expression_function_call','parser.py',59),
-  ('empty -> <empty>','empty',0,'p_empty','parser.py',63),
+  ('statement -> expression SEMICOLON','statement',2,'p_statement','parser.py',15),
+  ('statement -> repeat_loop','statement',1,'p_statement','parser.py',16),
+  ('statement -> if_statement','statement',1,'p_statement','parser.py',17),
+  ('statement -> if_else_statement','statement',1,'p_statement','parser.py',18),
+  ('expression -> IDENTIFIER EQUALS expression','expression',3,'p_expression_assign','parser.py',23),
+  ('expression -> expression PLUS expression','expression',3,'p_expression_binop','parser.py',27),
+  ('expression -> expression MINUS expression','expression',3,'p_expression_binop','parser.py',28),
+  ('expression -> expression TIMES expression','expression',3,'p_expression_binop','parser.py',29),
+  ('expression -> expression DIVIDE expression','expression',3,'p_expression_binop','parser.py',30),
+  ('expression -> expression GT expression','expression',3,'p_expression_binop','parser.py',31),
+  ('expression -> expression LT expression','expression',3,'p_expression_binop','parser.py',32),
+  ('expression -> NUMBER','expression',1,'p_expression_number','parser.py',36),
+  ('expression -> IDENTIFIER','expression',1,'p_expression_identifier','parser.py',40),
+  ('expression -> LBRACKET arguments RBRACKET','expression',3,'p_expression_list','parser.py',44),
+  ('arguments -> expression','arguments',1,'p_arguments','parser.py',48),
+  ('arguments -> arguments COMMA expression','arguments',3,'p_arguments','parser.py',49),
+  ('arguments -> empty','arguments',1,'p_arguments','parser.py',50),
+  ('expression -> STRING','expression',1,'p_expression_string','parser.py',60),
+  ('expression -> IDENTIFIER LPAREN arguments RPAREN','expression',4,'p_expression_function_call','parser.py',65),
+  ('repeat_loop -> REPEAT IDENTIFIER FROM expression TO expression DO COLON program END SEMICOLON','repeat_loop',11,'p_repeat_loop','parser.py',70),
+  ('if_statement -> IF expression THEN COLON program END SEMICOLON','if_statement',7,'p_if_statement','parser.py',75),
+  ('if_else_statement -> IF expression THEN COLON program ELSE COLON program END SEMICOLON','if_else_statement',10,'p_if_else_statement','parser.py',80),
+  ('empty -> <empty>','empty',0,'p_empty','parser.py',87),
 ]

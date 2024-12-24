@@ -1,7 +1,17 @@
 import ply.lex as lex
 
-# List of token names
-tokens = (
+reserved = {
+    'repeat': 'REPEAT',
+    'from': 'FROM',
+    'to': 'TO',
+    'do': 'DO',
+    'if': 'IF',
+    'then': 'THEN',
+    'else': 'ELSE',
+    'end': 'END'
+}
+
+tokens = list(reserved.values()) + [
     'NUMBER',
     'PLUS',
     'MINUS',
@@ -15,10 +25,12 @@ tokens = (
     'RBRACKET',
     'COMMA',
     'STRING',
-    'SEMICOLON'
-)
+    'SEMICOLON',
+    'COLON',
+    'GT',
+    'LT'
+]
 
-# Regular expressions for simple tokens
 t_PLUS = r'\+'
 t_MINUS = r'-'
 t_TIMES = r'\*'
@@ -31,14 +43,24 @@ t_RBRACKET = r'\]'
 t_COMMA = r','
 t_STRING = r'\"([^\\\"]|\\.)*\"'
 t_SEMICOLON = r';'
+t_REPEAT = r'repeat'
+t_IF = r'if'
+t_THEN = r'then'
+t_ELSE = r'else'
+# t_END = r'end'
+t_FROM = r'from'
+t_TO = r'to'
+t_COLON = r'\:'
+t_DO = r'do'
+t_GT = r'\>'
+t_LT = r'\<'
 
 
-# Identifier (variable name) rule
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
+    t.type = reserved.get(t.value, 'IDENTIFIER')  # Check for reserved words
     return t
 
-# Number token rule
 def t_NUMBER(t):
     r'\d+'
     t.value = int(t.value)
@@ -46,6 +68,11 @@ def t_NUMBER(t):
 
 # Ignoring spaces and tabs
 t_ignore = ' \t'
+
+# def t_END(t):
+#     r'end'
+#     print(f"Token END: {t.value} at line {t.lineno}")
+#     return t
 
 
 def t_newline(t):
@@ -61,6 +88,3 @@ def t_error(t):
 # Build the lexer
 lexer = lex.lex()
 
-# Test it out
-data = 'x = 3 + 4 * 10'
-lexer.input(data)
